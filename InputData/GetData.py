@@ -6,4 +6,3 @@ inputdata['FTR'] = data['FTR']
 inputdata['FTR'] = inputdata['FTR'].astype('category')
 inputdata['FTR'] = inputdata['FTR'].cat.codes
 inputdata.to_csv('inputdata.csv', index = False)
-print (inputdata)
