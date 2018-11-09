@@ -1,9 +1,15 @@
 import pandas
 
 data = pandas.read_csv('E0.csv')
-inputdata = data[data.columns[23:43]]
+inputdata = data.iloc[:,23:44]
 inputdata['FTR'] = data['FTR']
-inputdata['FTR'] = inputdata['FTR'].astype('category')
-inputdata['FTR'] = inputdata['FTR'].cat.codes
+
+def change_ftr(x):
+    if x == "H":
+        return 1
+    elif x == "D":
+        return 0
+    return 2
+
+inputdata['FTR'] = inputdata['FTR'].apply(change_ftr)
 inputdata.to_csv('inputdata.csv', index = False)
-print (inputdata)
