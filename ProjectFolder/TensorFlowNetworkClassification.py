@@ -11,10 +11,10 @@ data = pd.read_csv('inputdata.csv')
 inputData = data.iloc[:, 0:21]
 inputData = inputData.values
 inputData = shuffle(inputData)
-trainData = inputData[:360, :]
+trainData = inputData[:350, :]
 outputData = data.iloc[:,21].values
 outputData = shuffle(outputData)
-testData = inputData[360:, :]
+testData = inputData[350:, :]
 
 def map_result_to_output(x):
     outputData = np.empty([x.shape[0], 1])
@@ -43,6 +43,29 @@ print('Test accuracy:', test_acc)
 
 predictions = model.predict(testData)
 
+# for i in range(predictions.shape[0]):
+#     print((predictions[i]))
+#     print(outputTestData[i])
+
+def plot_results(i, predictions, label):
+  outputNames = ['Draw', 'Home', 'Away']
+  predictions, label = predictions[i], label[i]
+  plt.grid(False)
+  plt.xticks(range(3), outputNames, rotation=45, fontsize = 20)
+  plt.yticks([])
+  thisplot = plt.bar(range(3), predictions, color="#777777")
+  plt.ylim([0, 1]) 
+  predicted_label = np.argmax(predictions)
+  thisplot[predicted_label].set_color('red')
+  thisplot[int(label[0])].set_color('green')
+
+
+num_rows = 10
+num_cols = 3
+num_plots = num_rows*num_cols
+plt.figure(figsize=(5*2*num_cols, 4*num_rows))
+
 for i in range(predictions.shape[0]):
-    print((predictions[i]))
-    print(outputTestData[i])
+    plt.subplot(num_rows, 2*num_cols, 2*i+2)
+    plt.tight_layout()
+    plot_results(i, predictions, outputTestData)
