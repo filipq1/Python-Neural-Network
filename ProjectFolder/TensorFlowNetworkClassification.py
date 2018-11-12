@@ -51,7 +51,7 @@ def plot_results(i, predictions, label):
   outputNames = ['Draw', 'Home', 'Away']
   predictions, label = predictions[i], label[i]
   plt.grid(False)
-  plt.xticks(range(3), outputNames, rotation=45, fontsize = 20)
+  plt.xticks(range(3), outputNames, rotation=45, fontsize = 8)
   plt.yticks([])
   thisplot = plt.bar(range(3), predictions, color="#777777")
   plt.ylim([0, 1]) 
@@ -63,9 +63,11 @@ def plot_results(i, predictions, label):
 num_rows = 10
 num_cols = 3
 num_plots = num_rows*num_cols
-plt.figure(figsize=(5*2*num_cols, 4*num_rows))
+plt.figure(figsize=(2*2*num_cols, 2*num_rows))
 
 for i in range(predictions.shape[0]):
     plt.subplot(num_rows, 2*num_cols, 2*i+2)
     plt.tight_layout()
     plot_results(i, predictions, outputTestData)
+
+plt.show()
