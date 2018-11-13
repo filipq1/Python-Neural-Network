@@ -43,9 +43,9 @@ print('Test accuracy:', test_acc)
 
 predictions = model.predict(testData)
 
-# for i in range(predictions.shape[0]):
-#     print((predictions[i]))
-#     print(outputTestData[i])
+for i in range(predictions.shape[0]):
+    print((predictions[i]))
+    print(outputTestData[i])
 
 def plot_results(i, predictions, label):
   outputNames = ['Draw', 'Home', 'Away']

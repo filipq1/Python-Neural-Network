@@ -130,7 +130,7 @@ statsArray = np.vstack(values)
 statsArray = np.array(statsArray).T
 index = ['Row'+str(i) for i in range(1, len(statsArray)+1)]
 statsDataFrame = pd.DataFrame(data = statsArray, index = index, columns = names)
-statsDataFrame = statsDataFrame[['odds-home', 'home-wins', 'home-draws', 'home-losses', 'home-goals', 'home-opposition-goals','home-shots', 'home-opposition-shots', 'home-shots-on-target','home-opposition-shots-on-target', 'odds-draw', 'odds-away', 'away-wins', 'away-draws', 'away-losses', 'away-goals', 'away-opposition-goals', 'away-shots','away-opposition-shots','away-shots-on-target' ,'away-opposition-shots-on-target', 'result']]
+statsDataFrame = statsDataFrame[['home-wins', 'home-draws', 'home-losses', 'home-goals', 'home-opposition-goals','home-shots', 'home-opposition-shots', 'home-shots-on-target','home-opposition-shots-on-target', 'away-wins', 'away-draws', 'away-losses', 'away-goals', 'away-opposition-goals', 'away-shots','away-opposition-shots','away-shots-on-target' ,'away-opposition-shots-on-target', 'result', 'odds-home', 'odds-draw', 'odds-away']]
 
 def change_result(x):
     if x == "H":
@@ -141,4 +141,4 @@ def change_result(x):
 
 statsDataFrame['result'] = statsDataFrame['result'].apply(change_result)
 
-statsDataFrame.to_csv('stats.csv', index = False)
+statsDataFrame.to_csv('statsAnotherFormat.csv', index = False)
