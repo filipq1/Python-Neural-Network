@@ -26,10 +26,6 @@ from keras.layers import Dense
 from keras.models import Sequential
 import matplotlib.pyplot as plt
 
-print(type(predictors))
-print(type(target))
-print(predictors)
-print(target)
 trainPredictors = predictors[:3100, :]
 trainTarget = target.loc[0:3099]
 
