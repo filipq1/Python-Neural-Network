@@ -44,82 +44,39 @@ for i in range(3432):
     else: target2.iloc[i, 2] = 1
 
 
-
-
-
-
 import keras
 from keras.layers import Dense
 from keras.models import Sequential
 import matplotlib.pyplot as plt
 
-# trainPredictors = predictors[:3100, :]
-# trainTarget = target.loc[0:3099]
-
-# testPredictors = predictors[3100:, :]
-# testTarget = target.loc[3100:3431]
-# testOdds = odds.loc[3100:3431]
 
 n_cols = predictors.shape[1]
 
 
+def testModel(predictors, target, testSize, allSize=3431, n_cols=20):
+    model = Sequential()
+    model.add(Dense(16, activation='relu', input_shape=(n_cols,)))
+    model.add(Dense(9, activation='relu'))
+    model.add(Dense(3, activation='softmax'))
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    
+    trainPredictors = predictors[:testSize, :]
+    trainTarget = target.loc[0:(testSize-1)]
+    testPredictors = predictors[testSize:, :]
+    testTarget = target.loc[testSize:allSize]
+    
+    model_training = model.fit(trainPredictors, trainTarget, epochs = 20, verbose=False)
+    loss, acc = model.evaluate(testPredictors, testTarget, verbose=False)
 
-model = Sequential()
-model.add(Dense(16, activation='relu', input_shape=(n_cols,)))
-model.add(Dense(9, activation='relu'))
-model.add(Dense(3, activation='softmax'))
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-
-
-
-trainPredictors1 = predictors[:2745, :]
-trainTarget1 = target.loc[0:2744]
-testPredictors1 = predictors[2745:, :]
-testTarget1 = target.loc[2745:3431]
-model_training1 = model.fit(trainPredictors1, trainTarget1, epochs = 20, verbose=False)
-loss1, acc1 = model.evaluate(testPredictors1, testTarget1)
-
-
-trainPredictors2 = predictors[:3089, :]
-trainTarget2 = target.loc[0:3088]
-testPredictors2 = predictors[3089:, :]
-testTarget2 = target.loc[3089:3431]
-model_training2 = model.fit(trainPredictors2, trainTarget2, epochs = 20, verbose=False)
-loss2, acc2 = model.evaluate(testPredictors2, testTarget2)
+    return model_training, loss, acc
 
 
-trainPredictors3 = predictors[:3260, :]
-trainTarget3 = target.loc[0:3259]
-testPredictors3 = predictors[3260:, :]
-testTarget3 = target.loc[3260:3431]
-model_training3 = model.fit(trainPredictors3, trainTarget3, epochs = 20, verbose=False)
-loss3, acc3 = model.evaluate(testPredictors3, testTarget3)
-
-##################
-
-trainPredictors4 = predictors2[:2745, :]
-trainTarget4 = target2.loc[0:2744]
-testPredictors4 = predictors2[2745:, :]
-testTarget4 = target2.loc[2745:3431]
-model_training4 = model.fit(trainPredictors4, trainTarget4, epochs = 20, verbose=False)
-loss4, acc4 = model.evaluate(testPredictors4, testTarget4)
-
-
-trainPredictors5 = predictors2[:3089, :]
-trainTarget5 = target2.loc[0:3088]
-testPredictors5 = predictors2[3089:, :]
-testTarget5 = target2.loc[3089:3431]
-model_training5 = model.fit(trainPredictors5, trainTarget5, epochs = 20, verbose=False)
-loss5, acc5 = model.evaluate(testPredictors5, testTarget5)
-
-
-trainPredictors6 = predictors2[:3260, :]
-trainTarget6 = target2.loc[0:3259]
-testPredictors6 = predictors2[3260:, :]
-testTarget6 = target2.loc[3260:3431]
-model_training6 = model.fit(trainPredictors6, trainTarget6, epochs = 20, verbose=False)
-loss6, acc6 = model.evaluate(testPredictors6, testTarget6)
-
+model_training1, loss1, acc1 = testModel(predictors=predictors, target=target, testSize=1716, allSize=3431, n_cols=n_cols)
+model_training2, loss2, acc2 = testModel(predictors=predictors, target=target, testSize=2402, allSize=3431, n_cols=n_cols)
+model_training3, loss3, acc3 = testModel(predictors=predictors, target=target, testSize=3089, allSize=3431, n_cols=n_cols)
+model_training4, loss4, acc4 = testModel(predictors=predictors2, target=target2, testSize=1716, allSize=3431, n_cols=n_cols)
+model_training5, loss5, acc5 = testModel(predictors=predictors2, target=target2, testSize=2402, allSize=3431, n_cols=n_cols)
+model_training6, loss6, acc6 = testModel(predictors=predictors2, target=target2, testSize=3089, allSize=3431, n_cols=n_cols)
 
 
 print("acc1 - " + str(acc1))
@@ -129,15 +86,12 @@ print("acc4 - " + str(acc4))
 print("acc5 - " + str(acc5))
 print("acc6 - " + str(acc6))
 
-plt.plot(model_training1.history['acc'], '-r', label = '80%')
-plt.plot(model_training2.history['acc'], '-b', label = '90%')
-plt.plot(model_training3.history['acc'], '-y', label = '95%')
-plt.plot(model_training4.history['acc'], '-g', label = '80% - wymieszane')
-plt.plot(model_training5.history['acc'], '-m', label = '90% - wymieszane')
-plt.plot(model_training6.history['acc'], '-k', label = '95% - wymieszane')
+plt.plot(model_training1.history['acc'], '-r', label = '50%')
+plt.plot(model_training2.history['acc'], '-b', label = '70%')
+plt.plot(model_training3.history['acc'], '-y', label = '90%')
+plt.plot(model_training4.history['acc'], '-g', label = '50% - wymieszane')
+plt.plot(model_training5.history['acc'], '-m', label = '70% - wymieszane')
+plt.plot(model_training6.history['acc'], '-k', label = '90% - wymieszane')
 plt.legend(loc = 'lower right')
 plt.title('Models accuracy')
-plt.savefig(os.path.dirname(os.path.abspath(__file__)) + '\plot2.csv')
-
-
-
+plt.savefig(os.path.dirname(os.path.abspath(__file__)) + '\plot2.png')
