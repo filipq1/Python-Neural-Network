@@ -86,7 +86,7 @@ plt.plot(model4_training.history['acc'], '-g', label = 'model4')
 plt.plot(model5_training.history['acc'], '-m', label = 'model5')
 plt.legend(loc = 'upper left')
 plt.title('Models accuracy')
-plt.savefig("c:\\Users\\huber\\Desktop\\abcd.png")
+plt.savefig(os.path.dirname(os.path.abspath(__file__)) + '\plot1.csv')
 
 loss1, acc1 = model1.evaluate(testPredictors, testTarget, verbose=False)
 loss2, acc2 = model2.evaluate(testPredictors, testTarget, verbose=False)

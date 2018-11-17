@@ -1,4 +1,4 @@
-open K:\Elem_szt_intel\predykcja_proj\modele_gretl\data_log.csv
+open K:\Elem_szt_intel\predykcja_proj\dataLogit.csv
 # model 1
 logit result 0 oddshome homewins homedraws homelosses homegoals \
   homeoppositiongoals homeshots homeoppositionshots homeshotsontarget \

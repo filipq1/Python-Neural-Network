@@ -1,4 +1,4 @@
-data <- read.csv("data_log.csv")
+data <- read.csv("dataLog.csv")
 library(rpart)
 library(rattle)
 library(rpart.plot)

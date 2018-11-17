@@ -25,7 +25,7 @@ data_temp[,20]<-(data2[,20]-mean(data2[,20]))/sd(data2[,20])
 data_temp[,21]<-(data2[,21]-mean(data2[,21]))/sd(data2[,21])
 
 data2<-data_temp
-write.csv(data2,file = "data_log.csv")
+write.csv(data2,file = "dataLog.csv")
 #zmiana wartości zmiennej objaśnianej
 data2[,22]<-replace(data2[,22],data2$result==0, 0.5 )
 data2[,22]<-replace(data2[,22],data2$result==2, 0)
@@ -34,7 +34,7 @@ datawl<-data2[data2$result==0,]
 datawl2<-data2[data2$result==1,]
 datawins<-rbind(datawl, datawl2)
 data2<-datawins
-write.csv(data2,file = "data_logit.csv")
+write.csv(data2,file = "dataLogit.csv")
 #model
 #library("MASS")
 #log_mod<-glm(data2[,22]~data2[,1]+data2[,2]+data2[,3]+data2[,4]+data2[,5]+data2[,6]+data2[,7]+data2[,8]+data2[,9]+data2[,10]+data2[,11]+data2[,12]+data2[,13]+data2[,14]+data2[,15]+data2[,16]+data2[,17]+data2[,18]+data2[,19]+data2[,20]+data2[,21], method="binomial")

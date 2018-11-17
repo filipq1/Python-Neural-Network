@@ -137,19 +137,7 @@ plt.plot(model_training5.history['acc'], '-m', label = '90% - wymieszane')
 plt.plot(model_training6.history['acc'], '-k', label = '95% - wymieszane')
 plt.legend(loc = 'lower right')
 plt.title('Models accuracy')
-plt.savefig("c:\\Users\\huber\\Desktop\\abcd16.png")
+plt.savefig(os.path.dirname(os.path.abspath(__file__)) + '\plot2.csv')
 
 
-
-
-
-
-
-# print(trainPredictors1.shape)
-# print(trainTarget1.shape)
-
-# print(testPredictors1.shape)
-# print(testTarget1.shape)
-
-# print(predictors.shape)
 
