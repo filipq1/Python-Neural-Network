@@ -1,10 +1,10 @@
-data <- read.csv("inputdata.csv")
+data <- read.csv("data_log.csv")
 library(rpart)
 library(rattle)
 library(rpart.plot)
 library(RColorBrewer)
 
-tree <- rpart(FTR ~ ., data = data, method = "class")
+tree <- rpart(result ~ ., data = data, method = "class")
 
 fancyRpartPlot(tree)
 
