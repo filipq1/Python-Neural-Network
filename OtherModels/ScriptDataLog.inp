@@ -1,0 +1,7 @@
+open K:\Elem_szt_intel\predykcja_proj\modele_gretl\dataLog.csv
+# model 1
+logit result 0 oddshome homewins homedraws homelosses homegoals \
+  homeoppositiongoals homeshots homeoppositionshots homeshotsontarget \
+  homeoppositionshotsontarget oddsdraw oddsaway awaywins awaydraws \
+  awaylosses awaygoals awayoppositiongoals awayshots awayoppositionshots \
+  awayshotsontarget awayoppositionshotsontarget
